@@ -53,12 +53,13 @@ func (p Publication) Ack() error {
 }
 
 func (s *subscriber) Handle(ds *discordgo.Session, m interface{}) {
-	event, ok := m.(discordgo.Event)
+	// event, ok := m.(discordgo.Event)
+	publication, ok := m.(Publication)
 	if !ok {
 		panic("received incompatible message")
 	}
 
-	publication := Publication(event)
+	// publication := Publication(event)
 	s.brokerHandler(publication)
 }
 
