@@ -15,6 +15,10 @@ type discordBroker struct {
 	options broker.Options
 }
 
+func (b *discordBroker) String() string {
+	return "discordgw"
+}
+
 func (b *discordBroker) Options() broker.Options {
 	return b.options
 }
@@ -43,14 +47,28 @@ func (b *discordBroker) Init(opts ...broker.Option) (err error) {
 
 func (b *discordBroker) Publish(topic string, msg *broker.Message, opts ...broker.PublishOption) error {
 	// todo event type
-	ctx := context.Background()
+	/*
+		ctx := context.Background()
 
-	m := &discordgo.Event{
-		Operation: op,
-		Sequence:  s,
-		Type:      t,
-		RawData:   d,
-	}
+		opRaw := msg.Header["op"]
+		seqRaw := msg.Header["s"]
+		op64, err := strconv.ParseInt(opRaw, 10, 64)
+		if err != nil {
+			return err
+		}
+		op := int(op64)
+		s, err := strconv.ParseInt(seqRaw, 10, 64)
+		if err != nil {
+			return err
+		}
+
+		m := &discordgo.Event{
+			Operation: op,
+			Sequence:  s,
+			Type:      topic,
+			RawData:   msg.Body,
+		}
+	*/
 
 	return errors.New("UNIMPLEMENTED")
 }
@@ -66,7 +84,7 @@ func (b *discordBroker) Subscribe(topic string, h broker.Handler, opts ...broker
 		o(&options)
 	}
 
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	subscriber := &subscriber{
 		options:   options,

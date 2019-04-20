@@ -1,7 +1,6 @@
 package broker
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/bwmarrin/discordgo"
@@ -75,7 +74,7 @@ func (s *subscriber) Unsubscribe() error {
 }
 
 func (s *subscriber) add(hdlr broker.Handler) {
-	ctx, cancel := context.WithCancel(context.Background())
+	//ctx, cancel := context.WithCancel(context.Background())
 	s.brokerHandler = hdlr
 	s.session.AddHandler(s)
 }
